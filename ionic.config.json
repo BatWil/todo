@@ -1,0 +1,8 @@
+{
+  "name": "todo",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite",
+  "id": "e3170f43"
+}
