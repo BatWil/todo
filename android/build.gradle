@@ -1,5 +1,5 @@
 plugins {
-    id 'com.android.application' version '7.0.0'
+    id 'com.android.application'
     // Agregar el plugin de Google Services solo una vez con su versión
     id 'com.google.gms.google-services' version '4.4.2'
 }
