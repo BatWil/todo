@@ -30,13 +30,20 @@ const AddTask: React.FC<AddTaskProps> = ({ addTask }) => {
   );
 };
 
-const styles = {
+// Define los tipos específicos para las propiedades de CSS
+type FlexWrap = 'nowrap' | 'wrap' | 'wrap-reverse';
+
+const styles: {
+  container: React.CSSProperties,
+  input: React.CSSProperties,
+  button: React.CSSProperties
+} = {
   container: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     gap: '10px',
-    flexWrap: 'wrap',
+    flexWrap: 'wrap' as FlexWrap, // Agrega el tipo específico aquí
   },
   input: {
     padding: '15px',
