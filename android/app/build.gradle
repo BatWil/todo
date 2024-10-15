@@ -1,4 +1,4 @@
-plugins {
+/* plugins {
     // Asegúrate de incluir la versión de 'com.android.application'
     id 'com.android.application' version '8.6.0' apply false
     id 'com.android.library' version '8.6.0' apply false
@@ -56,3 +56,4 @@ try {
 } catch(Exception e) {
     logger.info("google-services.json not found, google-services plugin not applied. Push Notifications won't work")
 }
+ */
