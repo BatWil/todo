@@ -1,59 +1,62 @@
 import React, { useState } from "react";
 
 interface AddTaskProps {
-  onAddTask: (taskDescription: string) => void;
+  addTask: (taskDescription: string) => void;
 }
 
-const AddTask: React.FC<AddTaskProps> = ({ onAddTask }) => {
+const AddTask: React.FC<AddTaskProps> = ({ addTask }) => {
   const [taskDescription, setTaskDescription] = useState("");
 
-  const handleAddTask = () => {
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
     if (taskDescription.trim() === "") return;
-    onAddTask(taskDescription);
+    addTask(taskDescription);
     setTaskDescription("");
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        gap: "10px",
-      }}
-    >
+    <form onSubmit={handleSubmit} style={styles.container}>
       <input
         type="text"
         value={taskDescription}
         onChange={(e) => setTaskDescription(e.target.value)}
         placeholder="Escribe una tarea"
-        style={{
-          padding: "15px",
-          width: "250px",
-          border: "1px solid #444",
-          borderRadius: "8px",
-          backgroundColor: "#1e1e1e",
-          color: "#f1f1f1",
-          outline: "none",
-          fontSize: "14px",
-        }}
+        style={styles.input}
       />
-      <button
-        onClick={handleAddTask}
-        style={{
-          backgroundColor: "#3498db",
-          color: "white",
-          border: "none",
-          padding: "10px 20px",
-          borderRadius: "4px",
-          cursor: "pointer",
-          fontWeight: "bold",
-        }}
-      >
+      <button type="submit" style={styles.button}>
         Agregar Tarea
       </button>
-    </div>
+    </form>
   );
+};
+
+const styles = {
+  container: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: '10px',
+    flexWrap: 'wrap',
+  },
+  input: {
+    padding: '15px',
+    width: '250px',
+    border: '1px solid #444',
+    borderRadius: '8px',
+    backgroundColor: '#1e1e1e',
+    color: '#f1f1f1',
+    outline: 'none',
+    fontSize: '14px',
+  },
+  button: {
+    backgroundColor: '#3498db',
+    color: 'white',
+    border: 'none',
+    padding: '10px 20px',
+    borderRadius: '4px',
+    cursor: 'pointer',
+    fontWeight: 'bold',
+  },
 };
 
 export default AddTask;

@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import TaskItem from "./TaskItem";
 import AddTask from "./AddTask";
+import { Storage } from '@ionic/storage';
 
 interface Task {
   id: string;
@@ -8,30 +9,46 @@ interface Task {
   completed: boolean;
 }
 
+const store = new Storage();
+store.create();
+
 const TaskList: React.FC = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
 
-  const toggleCompletion = (id: string) => {
-    setTasks(tasks.map(task => 
+  useEffect(() => {
+    const loadTasks = async () => {
+      const storedTasks = await store.get('tasks');
+      if (storedTasks) setTasks(storedTasks);
+    };
+    loadTasks();
+  }, []);
+
+  const toggleCompletion = async (id: string) => {
+    const updatedTasks = tasks.map(task =>
       task.id === id ? { ...task, completed: !task.completed } : task
-    ));
+    );
+    setTasks(updatedTasks);
+    await store.set('tasks', updatedTasks);
   };
 
-  const deleteTask = (id: string) => {
-    setTasks(tasks.filter(task => task.id !== id));
+  const deleteTask = async (id: string) => {
+    const updatedTasks = tasks.filter(task => task.id !== id);
+    setTasks(updatedTasks);
+    await store.set('tasks', updatedTasks);
   };
 
-  const addTask = (taskDescription: string) => {
+  const addTask = async (taskDescription: string) => {
     const newTask = { id: Date.now().toString(), task: taskDescription, completed: false };
-    setTasks([...tasks, newTask]);
+    const updatedTasks = [...tasks, newTask];
+    setTasks(updatedTasks);
+    await store.set('tasks', updatedTasks);
   };
 
   return (
-    <div style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}>
-      <h1 style={{ textAlign: "center" }}>To-Do List</h1>
-      <AddTask onAddTask={addTask} />
-      <div style={{ marginTop: "20px" }}>
-        {tasks.map((task) => (
+    <div style={styles.container}>
+      <AddTask addTask={addTask} />
+      <div style={styles.taskList}>
+        {tasks.map(task => (
           <TaskItem
             key={task.id}
             task={task}
@@ -42,6 +59,21 @@ const TaskList: React.FC = () => {
       </div>
     </div>
   );
+};
+
+const styles = {
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    padding: '20px',
+    maxWidth: '600px',
+    margin: '0 auto',
+  },
+  taskList: {
+    width: '100%',
+    marginTop: '20px',
+  },
 };
 
 export default TaskList;
