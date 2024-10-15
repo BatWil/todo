@@ -38,15 +38,7 @@ android {
 }
 
 dependencies {
-    // Importar el BoM de Firebase
-    implementation platform('com.google.firebase:firebase-bom:33.4.0')
 
-    // Firebase Analytics
-    implementation 'com.google.firebase:firebase-analytics'
-
-    // Añadir otras dependencias de Firebase que necesites
-    implementation 'com.google.firebase:firebase-auth' // Autenticación (opcional)
-    implementation 'com.google.firebase:firebase-firestore' // Firestore (opcional)
 
     // Dependencias de Android que ya puedas tener
     implementation 'androidx.core:core-ktx:1.10.1'
