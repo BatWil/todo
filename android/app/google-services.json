@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "873063802154",
-    "project_id": "todo-994da",
-    "storage_bucket": "todo-994da.appspot.com"
+    "project_number": "606661374019",
+    "project_id": "todoreact-b1d61",
+    "storage_bucket": "todoreact-b1d61.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:873063802154:android:e3e0b1c1680b0f71fc6a53",
+        "mobilesdk_app_id": "1:606661374019:android:59931f55683659ca8364f6",
         "android_client_info": {
-          "package_name": "com.miapp.todo"
+          "package_name": "ToDoReact.New"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAHkYl8zaWC_w4_rQtttM2NQ1OGCewllQA"
+          "current_key": "AIzaSyCKJdNV026fqf0WW2pyOek_MJUYW4UVfY8"
         }
       ],
       "services": {
