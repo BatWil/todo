@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "606661374019",
+    "project_id": "todoreact-b1d61",
+    "storage_bucket": "todoreact-b1d61.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:606661374019:android:59931f55683659ca8364f6",
+        "android_client_info": {
+          "package_name": "ToDoReact.New"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKJdNV026fqf0WW2pyOek_MJUYW4UVfY8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
