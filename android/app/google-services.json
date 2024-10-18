@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:606661374019:android:59931f55683659ca8364f6",
         "android_client_info": {
-          "package_name": "ToDoReact.New"
+          "package_name": "io.ionic.starter"
         }
       },
       "oauth_client": [],
