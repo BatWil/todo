@@ -14,6 +14,13 @@ import "@ionic/react/css/text-transformation.css";
 import "@ionic/react/css/flex-utils.css";
 import "@ionic/react/css/display.css";
 
+import {NextUIProvider} from '@nextui-org/react'
+import './index.css'
+
+
+
+
+
 
 // Configuración inicial de Ionic
 setupIonicReact();
@@ -24,6 +31,8 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <App />
+    <NextUIProvider>
+      <App />
+    </NextUIProvider>
   </React.StrictMode>
 );

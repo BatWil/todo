@@ -1,5 +1,7 @@
 // TaskItem.tsx
 import React from "react";
+import { Checkbox } from "@nextui-org/checkbox";
+
 
 interface Task {
   id: string;
@@ -25,15 +27,15 @@ const TaskItem: React.FC<TaskItemProps> = ({ task, toggleCompletion, deleteTask 
         borderRadius: "4px",
       }}
     >
-      <input
-        type="checkbox"
-        checked={task.completed}
+      <Checkbox
+        isSelected={task.completed}
         onChange={() => toggleCompletion(task.id)}
-        style={{ marginRight: "10px" }} // Espacio entre el checkbox y el texto
-      />
-      <span style={{ textDecoration: task.completed ? "line-through" : "none" }}>
-        {task.task}
-      </span>
+        style={{ marginRight: "100px" }}
+      >
+        <span style={{ textDecoration: task.completed ? "line-through" : "none" }}>
+          {task.task}
+        </span>
+      </Checkbox>
       <div style={{ marginLeft: "auto" }}>
         <button
           onClick={() => deleteTask(task.id)}
@@ -47,15 +49,6 @@ const TaskItem: React.FC<TaskItemProps> = ({ task, toggleCompletion, deleteTask 
             marginLeft: "10px", // Espaciado entre el texto de tarea y el botón de eliminar
           }}
         >
-{/*           <img
-            src="./resources/trash-bin.png" // Asegúrate de que la ruta sea correcta
-            alt="Eliminar"
-            style={{
-              width: "15px", // Ajusta el tamaño de la imagen según sea necesario
-              height: "15px",
-              marginRight: "5px" // Espacio entre la imagen y el texto
-            }}
-          /> */}
           <span style={{ color: "#FF0000", fontWeight: "bold" }}>Eliminar</span>
         </button>
       </div>
