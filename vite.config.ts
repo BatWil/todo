@@ -9,4 +9,13 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    rollupOptions: {
+      external: [
+        'react-native',
+        'react-native/Libraries/vendor/emitter/EventEmitter',
+        'react-native/Libraries/Utilities/binaryToBase64'
+      ]
+    }
+  }
 })

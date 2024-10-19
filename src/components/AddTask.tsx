@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import {Button, ButtonGroup, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem} from "@nextui-org/react";
 import {ChevronDownIcon} from './ChevronDownIcon';
 
+import {Chip} from "@nextui-org/react";
+
 
 interface AddTaskProps {
   addTask: (taskDescription: string) => void;
@@ -35,6 +37,13 @@ const AddTask: React.FC<AddTaskProps> = ({ addTask }) => {
 
   return (
     <form onSubmit={handleSubmit} style={styles.container}>
+
+
+      {/*
+        <Chip color="warning" variant="shadow">Shadow</Chip>
+        <Chip color="warning" variant="dot">Dot</Chip> 
+      */}
+
       <input
         type="text"
         value={taskDescription}
@@ -42,7 +51,7 @@ const AddTask: React.FC<AddTaskProps> = ({ addTask }) => {
         placeholder="Escribe una tarea"
         style={styles.input}
       />
-      <Button type="submit" style={styles.button}>
+      <Button type="submit" color="warning" >
         Agregar Tarea
       </Button>
       <ButtonGroup variant="flat">
@@ -75,6 +84,8 @@ const AddTask: React.FC<AddTaskProps> = ({ addTask }) => {
         </Dropdown>
       </ButtonGroup>
     </form>
+
+    
   );
 };
 
@@ -94,7 +105,7 @@ const styles: {
     flexWrap: 'wrap' as FlexWrap, // Agrega el tipo específico aquí
   },
   input: {
-    padding: '15px',
+    padding: '10px',
     width: '250px',
     border: '1px solid #444',
     borderRadius: '8px',
