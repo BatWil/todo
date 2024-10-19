@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { IonApp, IonContent, IonHeader, IonToolbar, IonTitle, IonIcon } from "@ionic/react";
+import { IonApp, IonContent, IonToolbar, IonTitle, IonIcon } from "@ionic/react";
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Input } from "@nextui-org/react"; // Importa los componentes necesarios
-import ClockGuatemala from './components/ClockGuatemala'; // Asegúrate de que la ruta sea correcta
-import { mapOutline, personCircleOutline } from "ionicons/icons";
+import ClockGuatemala from './components/ClockGuatemala'; 
+import { mapOutline } from "ionicons/icons";
 import TaskList from "./components/TaskList";
 import { SheetSide } from "./components/SheetSide";
 
-
-/* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
 import "@ionic/react/css/normalize.css";
 import "@ionic/react/css/structure.css";
@@ -23,23 +21,23 @@ import "./theme/variables.css";
 
 const App: React.FC = () => {
   const [userName, setUserName] = useState<string>("");
-  const [firstVisit, setFirstVisit] = useState<boolean>(true);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   useEffect(() => {
     const visited = localStorage.getItem("visited");
     if (!visited) {
       onOpen(); // Abre el modal si es la primera visita
-      setFirstVisit(true);
     } else {
-      setFirstVisit(false);
       setUserName(visited); // Establece el nombre del usuario desde el localStorage
     }
   }, [onOpen]);
 
   const handleNameSubmit = () => {
-    localStorage.setItem("visited", userName); // Guarda el nombre en localStorage
-    onOpenChange(false); // Cierra el modal
+    if (userName.trim() !== "") {
+      localStorage.setItem("visited", userName); // Guarda el nombre en localStorage
+      onOpenChange(); // Cierra el modal
+
+    }
   };
 
   return (
@@ -47,10 +45,9 @@ const App: React.FC = () => {
       <IonToolbar>
         <IonTitle>
           <div style={styles.welcomeContainer}>
-            <h1 style={styles.welcomeText}>Hi, {userName || "Sarah"}!</h1>
+            <h1 style={styles.welcomeText}>Hi, {userName || "there"}!</h1> {/* Muestra "Hi, there" si userName está vacío */}
             <p style={styles.subText}>
               <IonIcon icon={mapOutline} style={styles.badgeStyle} />
-              <span style={{ margin: '0 2px' }}></span> {/* Espacio de 10 píxeles */}
               <ClockGuatemala />
             </p>
           </div>
@@ -106,13 +103,13 @@ const styles = {
   },
   subText: {
     fontSize: "0.8rem",
-    color: "#aaa", // Color del texto del subtítulo
+    color: "#aaa", 
     display: "flex",
     alignItems: "center",
   },
   badgeStyle: {
     fontSize: "0.9rem",
-    color: "#ffd700", // Color para el ícono de Prime
+    color: "#ffd700",
     marginRight: "4px",
   },
   sheetContainer: {
