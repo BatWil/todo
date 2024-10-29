@@ -1,14 +1,10 @@
 import React, { useState } from "react";
-import {Button, ButtonGroup, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem} from "@nextui-org/react";
-import {ChevronDownIcon} from './ChevronDownIcon';
-
-import {Chip} from "@nextui-org/react";
-
+import { Button, ButtonGroup, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem } from "@nextui-org/react";
+import { ChevronDownIcon } from './ChevronDownIcon';
 
 interface AddTaskProps {
-  addTask: (taskDescription: string) => void;
+  addTask: (taskDescription: string, taskType: string) => void; // Agrega `taskType` como parámetro
 }
-
 
 const AddTask: React.FC<AddTaskProps> = ({ addTask }) => {
   const [taskDescription, setTaskDescription] = useState("");
@@ -26,24 +22,17 @@ const AddTask: React.FC<AddTaskProps> = ({ addTask }) => {
     rebase: "Progreso",
   };
 
-  const selectedOptionValue = Array.from(selectedOption)[0] || "merge"; // Asegúrate de que siempre haya un valor
+  const selectedOptionValue = Array.from(selectedOption)[0] || "merge";
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (taskDescription.trim() === "") return;
-    addTask(taskDescription);
+    addTask(taskDescription, selectedOptionValue); // Envía `selectedOptionValue` como `taskType`
     setTaskDescription("");
   };
 
   return (
     <form onSubmit={handleSubmit} style={styles.container}>
-
-
-      {/*
-        <Chip color="warning" variant="shadow">Shadow</Chip>
-        <Chip color="warning" variant="dot">Dot</Chip> 
-      */}
-
       <input
         type="text"
         value={taskDescription}
@@ -51,7 +40,7 @@ const AddTask: React.FC<AddTaskProps> = ({ addTask }) => {
         placeholder="Escribe una tarea"
         style={styles.input}
       />
-      <Button type="submit" color="warning" >
+      <Button type="submit" color="warning">
         Agregar Tarea
       </Button>
       <ButtonGroup variant="flat">
@@ -84,13 +73,8 @@ const AddTask: React.FC<AddTaskProps> = ({ addTask }) => {
         </Dropdown>
       </ButtonGroup>
     </form>
-
-    
   );
 };
-
-// Define los tipos específicos para las propiedades de CSS
-type FlexWrap = 'nowrap' | 'wrap' | 'wrap-reverse';
 
 const styles: {
   container: React.CSSProperties,
@@ -102,7 +86,7 @@ const styles: {
     alignItems: 'center',
     justifyContent: 'center',
     gap: '10px',
-    flexWrap: 'wrap' as FlexWrap, // Agrega el tipo específico aquí
+    flexWrap: 'wrap' as 'wrap',
   },
   input: {
     padding: '10px',

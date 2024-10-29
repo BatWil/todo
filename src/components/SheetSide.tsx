@@ -1,8 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+
 import {
   Sheet,
   SheetClose,
@@ -13,6 +12,14 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
+
+import { ComboboxForm } from "@/components/SelecColor"
+import {ToastWithTitle} from "@/components/tosting"
+
+import ServoControl from "@/components/ServoControl";
+
+
+
 
 // Solo queda la posición 'left'
 const SHEET_SIDES = ["left"] as const
@@ -36,8 +43,10 @@ export function SheetSide() {
             <SheetHeader>
               <SheetTitle>Configuraciones</SheetTitle>
               <SheetDescription>
-                Aqui podras configurar el aspecto de la app y unos ajustes adicionales. 
-                <br/>"Estado actual: En dessarrrollo"
+
+                <ServoControl />
+
+
               </SheetDescription>
             </SheetHeader>
     

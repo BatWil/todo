@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { IonApp, IonContent, IonToolbar, IonTitle, IonIcon } from "@ionic/react";
-import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Input } from "@nextui-org/react"; // Importa los componentes necesarios
-import ClockGuatemala from './components/ClockGuatemala'; 
+import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Input } from "@nextui-org/react";
+import ClockGuatemala from './components/ClockGuatemala';
 import { mapOutline } from "ionicons/icons";
 import TaskList from "./components/TaskList";
 import { SheetSide } from "./components/SheetSide";
@@ -19,24 +19,34 @@ import "@ionic/react/css/display.css";
 import "@ionic/react/css/palettes/dark.always.css";
 import "./theme/variables.css";
 
+import { LocalNotifications } from '@capacitor/local-notifications';
+
 const App: React.FC = () => {
   const [userName, setUserName] = useState<string>("");
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   useEffect(() => {
+    const requestPermission = async () => {
+      const result = await LocalNotifications.requestPermissions();
+      if (result.display !== 'granted') {
+        console.warn("Permiso de notificaciones no concedido");
+      }
+    };
+
     const visited = localStorage.getItem("visited");
     if (!visited) {
       onOpen(); // Abre el modal si es la primera visita
     } else {
       setUserName(visited); // Establece el nombre del usuario desde el localStorage
     }
+
+    requestPermission(); // Solicita permiso para las notificaciones
   }, [onOpen]);
 
   const handleNameSubmit = () => {
     if (userName.trim() !== "") {
       localStorage.setItem("visited", userName); // Guarda el nombre en localStorage
       onOpenChange(); // Cierra el modal
-
     }
   };
 
@@ -45,7 +55,7 @@ const App: React.FC = () => {
       <IonToolbar>
         <IonTitle>
           <div style={styles.welcomeContainer}>
-            <h1 style={styles.welcomeText}>Hi, {userName || "there"}!</h1> {/* Muestra "Hi, there" si userName está vacío */}
+            <h1 style={styles.welcomeText}>Hi, {userName || "there"}!</h1>
             <p style={styles.subText}>
               <IonIcon icon={mapOutline} style={styles.badgeStyle} />
               <ClockGuatemala />
@@ -103,7 +113,7 @@ const styles = {
   },
   subText: {
     fontSize: "0.8rem",
-    color: "#aaa", 
+    color: "#aaa",
     display: "flex",
     alignItems: "center",
   },
