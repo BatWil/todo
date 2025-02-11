@@ -41,7 +41,6 @@ export function SheetSide() {
 
 
             </SheetHeader>
-              <SheetDescription />
 
           </SheetContent>
         </Sheet>
