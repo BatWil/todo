@@ -13,10 +13,6 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet"
 
-import { ComboboxForm } from "@/components/SelecColor"
-import {ToastWithTitle} from "@/components/tosting"
-
-import ServoControl from "@/components/ServoControl";
 
 
 
@@ -42,14 +38,10 @@ export function SheetSide() {
           <SheetContent side={side}>
             <SheetHeader>
               <SheetTitle>Configuraciones</SheetTitle>
-              <SheetDescription>
-
-                <ServoControl />
 
 
-              </SheetDescription>
             </SheetHeader>
-    
+              <SheetDescription />
 
           </SheetContent>
         </Sheet>
